@@ -8,9 +8,9 @@
 }
 .hljs-copy-button {
   position: absolute;
-  transform: translateX(calc(100% + 0.5rem));
-  top: 0.5rem;
-  right: 0.5rem;
+  transform: translateX(calc(100% + 1.125em));
+  top: 1em;
+  right: 1em;
   width: 2rem;
   height: 2rem;
   text-indent: -9999px; /* Hide the inner text */
