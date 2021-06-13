@@ -1,6 +1,6 @@
 /**
  *  @file highlight-copy.js
- *  @author Arron Hunt <arron@gretel.ai>
+ *  @author Arron Hunt <arronjhunt@gmail.com>
  *  @copyright Copyright 2021. All rights reserved.
  */
 

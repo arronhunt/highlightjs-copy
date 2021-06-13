@@ -1,13 +1,14 @@
 {
-  "name": "hljs-copy",
+  "name": "highlightjs-copy",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple, accessible highlightjs plugin to add a copy button to your codeblocks.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "uglifyjs index.js -o ./dist/highlightjs-copy.min.js && uglifycss highlightjs-copy.css > ./dist/highlightjs-copy.min.css && exit"
   },
-  "author": "",
+  "author": "Arron Hunt <arronjhunt@gmail.com>",
+  "homepage": "https://github.com/arronhunt/highlightjs-copy",
   "license": "ISC",
   "devDependencies": {
     "uglify-js": "^3.13.9",
