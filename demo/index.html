@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Copy button demo</title>
+    <!-- highlight.js -->
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css"
+    />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="../highlightjs-copy.css" />
+  </head>
+
+  <body>
+    <h1>Demo</h1>
+    <pre><code class="language-js">function readmeDemo() {
+  alert("Hello world!");
+}</code></pre>
+    <pre><code class="language-js">let x = 5;
+let y = 8;
+return x + y;
+// 13</code></pre>
+    <pre><code class="language-js">console.log('Hello world!');</code></pre>
+    <h2>Test</h2>
+    <p>Test out the copy button by pasting text here</p>
+    <textarea cols="100" rows="30"></textarea>
+    <!-- Content -->
+    <script src="../index.js"></script>
+    <script>
+      hljs.debugMode();
+      hljs.addPlugin(
+        CopyButtonPlugin((el, text) => {
+          console.log("Copied to clipboard!", el, text);
+        })
+      );
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>
