@@ -6,13 +6,13 @@
 
 /**
  * Adds a copy button to highlightjs code blocks
- * @param {copyCallback} [callback] - Called after the copy event has occured
+ * @param {copyCallback} [callback] - Called after the copy event has occured.
  * @returns {Object} hljs plugin object.
  */
 function CopyButtonPlugin(callback) {
   return {
     "after:highlightElement"({ el, text }) {
-      // Create the copy button and append it to the codeblock
+      // Create the copy button and append it to the codeblock.
       let button = Object.assign(document.createElement("button"), {
         innerHTML: "Copy",
         className: "hljs-copy-button",
@@ -20,6 +20,12 @@ function CopyButtonPlugin(callback) {
       button.dataset.copied = false;
       el.parentElement.classList.add("hljs-copy-wrapper");
       el.parentElement.appendChild(button);
+
+      // Add a custom proprety to the code block so that the copy button can reference and match its background-color value.
+      el.style.setProperty(
+        "--hljs-theme-background",
+        window.getComputedStyle(el).backgroundColor
+      );
 
       button.onclick = function () {
         if (!navigator.clipboard) return;
