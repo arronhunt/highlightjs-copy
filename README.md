@@ -1,6 +1,6 @@
 # highlightjs-copy
 
-A simple, accessible highlightjs plugin to add a copy button to your codeblocks.
+A simple, accessible [highlightjs](https://github.com/highlightjs/highlight.js) plugin to add a copy button to your codeblocks.
 
 ![](./assets/preview.png)
 
@@ -11,7 +11,7 @@ A simple, accessible highlightjs plugin to add a copy button to your codeblocks.
 ```
 
 ```html
-<link rel="stylesheet" href="path/to/>
+<link rel="stylesheet" href="path/to/highlight-copy.css" />
 ```
 
 ## Usage
