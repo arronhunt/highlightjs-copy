@@ -6,12 +6,23 @@ A simple, accessible [highlightjs](https://github.com/highlightjs/highlight.js) 
 
 ## Install
 
+### Using a CDN
+
 ```html
-<script src="path/to/highlightjs-copy.min.js">
+<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
 ```
 
 ```html
-<link rel="stylesheet" href="path/to/highlight-copy.css" />
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"
+/>
+```
+
+### NPM
+
+```bash
+npm install highlightjs-copy
 ```
 
 ## Usage

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "uglifyjs index.js -o ./dist/highlightjs-copy.min.js && uglifycss highlightjs-copy.css > ./dist/highlightjs-copy.min.css && exit"
+    "prepare": "uglifyjs index.js -o ./dist/highlightjs-copy.min.js && uglifycss ./styles/highlightjs-copy.css > ./dist/highlightjs-copy.min.css && exit"
   },
   "author": "Arron Hunt <arronjhunt@gmail.com>",
   "homepage": "https://github.com/arronhunt/highlightjs-copy",
