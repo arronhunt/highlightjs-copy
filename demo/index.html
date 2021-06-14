@@ -2,12 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Copy button demo</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>Demo | highlight-js</title>
+    <meta
+      name="description"
+      content="A simple, accessible highlightjs plugin to add a copy button to your code blocks."
+    />
+    <meta
+      property="og:image"
+      content="https://repository-images.githubusercontent.com/376601151/45b9bc80-cc37-11eb-936c-c3a55741bf77"
+    />
+    <meta
+      name="twitter:image:src"
+      content="https://repository-images.githubusercontent.com/376601151/45b9bc80-cc37-11eb-936c-c3a55741bf77"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
     <!-- highlight.js -->
-    <!-- <link
-      rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css"
-    /> -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="../styles/highlightjs-copy.css" />
@@ -16,9 +26,9 @@
     <main>
       <section class="examples p-2">
         <div class="wrapper">
-          <h2>Demo</h2>
-          <h3>Basic examples</h3>
-          <h4>Basic copy/paste</h4>
+          <h1>highlightjs-copy Demo</h1>
+          <h2>Basic examples</h2>
+          <h3>Basic copy/paste</h3>
           <p>Try copying the code below and pasting in the preview.</p>
           <pre><code class="language-js">function readmeDemo() {
   alert("Hello world!");
@@ -28,22 +38,22 @@ let y = 8;
 return x + y;
 // 13</code></pre>
           <pre><code class="language-js">console.log('Hello world!');</code></pre>
-          <h3>Advanced hooks</h3>
+          <h2>Advanced hooks</h2>
           <p>
             Hooks allow you to listen to copy events and intercept the copy
             event before it is applied to the clipboard.
           </p>
-          <h4>Usage</h4>
+          <h3>Usage</h3>
           <pre><code class="language-js">hljs.addPlugin(new CopyButtonPluginClass({
   hook: (text, el) => text.toUpperCase()
 }));</code></pre>
-          <h4>Append strings</h4>
+          <h3>Append strings</h3>
           <p>
             You can append string values to copied code. In this example, a
             copyright message will automatically be appended.
           </p>
           <pre><code class="plaintext" data-copyright="© Copyright 1990. All rights reserved.">Here's an example where you can prepend copy...</code></pre>
-          <h4>Replace strings</h4>
+          <h3>Replace strings</h3>
           <p>
             In this example, we'll replace the template strings with predefined
             values when copying.
@@ -51,7 +61,7 @@ return x + y;
           <pre><code class="plaintext" data-replace="true">Replace template strings with other values.
 My name is {{name}}
 my favorite animal is a {{dog}}</code></pre>
-          <h4>Update the code element</h4>
+          <h3>Update the code element</h3>
           <p>Change the color of the codeblock when it is copied.</p>
           <pre><code class="plaintext" data-highlight="true">Copy me and watch me change!</code></pre>
         </div>
