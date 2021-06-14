@@ -4,37 +4,114 @@
     <meta charset="UTF-8" />
     <title>Copy button demo</title>
     <!-- highlight.js -->
-    <link
+    <!-- <link
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css"
-    />
+    /> -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="../styles/highlightjs-copy.css" />
   </head>
   <body>
-    <h1>Demo</h1>
-    <pre><code class="language-js">function readmeDemo() {
+    <main>
+      <section class="examples p-2">
+        <div class="wrapper">
+          <h2>Demo</h2>
+          <h3>Basic examples</h3>
+          <h4>Basic copy/paste</h4>
+          <p>Try copying the code below and pasting in the preview.</p>
+          <pre><code class="language-js">function readmeDemo() {
   alert("Hello world!");
 }</code></pre>
-    <pre><code class="language-js">let x = 5;
+          <pre><code class="language-js">let x = 5;
 let y = 8;
 return x + y;
 // 13</code></pre>
-    <pre><code class="language-js">console.log('Hello world!');</code></pre>
-    <h2>Test</h2>
-    <p>Test out the copy button by pasting text here</p>
-    <textarea rows="30" style="width: 100%"></textarea>
+          <pre><code class="language-js">console.log('Hello world!');</code></pre>
+          <h3>Advanced hooks</h3>
+          <p>
+            Hooks allow you to listen to copy events and intercept the copy
+            event before it is applied to the clipboard.
+          </p>
+          <h4>Usage</h4>
+          <pre><code class="language-js">hljs.addPlugin(new CopyButtonPluginClass({
+  hook: (text, el) => text.toUpperCase()
+}));</code></pre>
+          <h4>Append strings</h4>
+          <p>
+            You can append string values to copied code. In this example, a
+            copyright message will automatically be appended.
+          </p>
+          <pre><code class="plaintext" data-copyright="© Copyright 1990. All rights reserved.">Here's an example where you can prepend copy...</code></pre>
+          <h4>Replace strings</h4>
+          <p>
+            In this example, we'll replace the template strings with predefined
+            values when copying.
+          </p>
+          <pre><code class="plaintext" data-replace="true">Replace template strings with other values.
+My name is {{name}}
+my favorite animal is a {{dog}}</code></pre>
+          <h4>Update the code element</h4>
+          <p>Change the color of the codeblock when it is copied.</p>
+          <pre><code class="plaintext" data-highlight="true">Copy me and watch me change!</code></pre>
+        </div>
+      </section>
+      <aside class="preview">
+        <pre
+          class="paste-box"
+          id="pastebox"
+          tabindex="1"
+          contenteditable="true"
+        >
+// paste text here</pre
+        >
+      </aside>
+      <section class="history" id="history"></section>
+    </main>
     <!-- Content -->
     <script src="../index.js"></script>
     <script>
       hljs.debugMode();
       hljs.addPlugin(
-        CopyButtonPlugin((el, text) => {
-          console.log("Copied to clipboard!", el, text);
+        new CopyButtonPluginClass({
+          hook: (text, el) => {
+            if (el.dataset.copyright) {
+              return `${text}\n\n${el.dataset.copyright}`;
+            }
+            if (el.dataset.highlight) {
+              el.style.filter = "saturate(5)";
+            }
+            if (el.dataset.replace) {
+              return text
+                .replace("{{name}}", "Alexander Graham Bell")
+                .replace("{{dog}}", "Platypus");
+            }
+            return text;
+          },
+          callback: (text, el) => {
+            updateHistory({ el, text, ts: new Date() });
+          },
         })
       );
       hljs.highlightAll();
+    </script>
+    <script>
+      const pasteBox = document.getElementById("pastebox");
+      const history = document.getElementById("history");
+
+      function updateHistory(data) {
+        let details = document.createElement("details");
+        details.open = true;
+        let summary = document.createElement("summary");
+        summary.innerText = `New copy event`;
+        let text = Object.assign(document.createElement("pre"), {
+          className: "log-item p-1",
+          innerText: `${data.text}`,
+        });
+        details.appendChild(summary);
+        details.appendChild(text);
+        history.prepend(details);
+      }
     </script>
   </body>
 </html>
