@@ -7,7 +7,7 @@
 /**
  * Adds a copy button to highlightjs code blocks
  */
-class CopyButtonPluginClass {
+class CopyButtonPlugin {
   /**
    * Create a new CopyButtonPlugin class instance
    * @param {Object} [options] - Functions that will be called when a copy event fires

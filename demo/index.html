@@ -88,7 +88,7 @@ my favorite animal is a {{dog}}</code></pre>
     <script>
       hljs.debugMode();
       hljs.addPlugin(
-        new CopyButtonPluginClass({
+        new CopyButtonPlugin({
           hook: (text, el) => {
             if (el.dataset.copyright) {
               return `${text}\n\n${el.dataset.copyright}`;
