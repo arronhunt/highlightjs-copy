@@ -35,6 +35,11 @@
   width: auto;
   background-image: none;
 }
+@media (prefers-reduced-motion) {
+  .hljs-copy-button {
+    transition: none;
+  }
+}
 
 /* visually-hidden */
 .hljs-copy-alert {
