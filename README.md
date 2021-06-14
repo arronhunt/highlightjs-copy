@@ -2,7 +2,7 @@
 
 A simple, accessible [highlightjs](https://github.com/highlightjs/highlight.js) plugin to add a copy button to your codeblocks.
 
-![](./assets/preview.png)
+![Preview](https://repository-images.githubusercontent.com/376601151/45b9bc80-cc37-11eb-936c-c3a55741bf77)
 
 ## Install
 
