@@ -1,5 +1,7 @@
 # highlightjs-copy
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6b2257bf-a914-4f05-8166-a678eaff9fe8/deploy-status)](https://app.netlify.com/sites/highlightjs-copy/deploys)
+
 A simple, accessible [highlightjs](https://github.com/highlightjs/highlight.js) plugin to add a copy button to your codeblocks.
 
 ![Preview](https://repository-images.githubusercontent.com/376601151/45b9bc80-cc37-11eb-936c-c3a55741bf77)
