@@ -6,6 +6,10 @@ A simple, accessible [highlightjs](https://github.com/highlightjs/highlight.js) 
 
 ![Preview](https://repository-images.githubusercontent.com/376601151/45b9bc80-cc37-11eb-936c-c3a55741bf77)
 
+## Demo
+
+[Check out the demo](https://highlightjs-copy.netlify.app)
+
 ## Install
 
 ### Using a CDN
