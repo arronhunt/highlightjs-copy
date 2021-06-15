@@ -33,27 +33,67 @@ npm install highlightjs-copy
 
 ## Usage
 
-Basic usage
+### Basic usage
 
 ```javascript
-hljs.addPlugin(CopyButtonPlugin());
+hljs.addPlugin(new CopyButtonPlugin());
 ```
 
-With a callback
+### With a callback
 
 ```javascript
 hljs.addPlugin(
-  CopyButtonPlugin(function (el, text) {
-    console.log("Copied to clipboard", text);
+  new CopyButtonPlugin({
+    callback: (text, el) => console.log("Copied to clipboard", text),
   })
 );
 ```
 
+### Modify copied text with hooks
+
+```javascript
+hljs.addPlugin(
+  new CopyButtonPlugin({
+    hook: (text, el) => text + "\nCopied from my cool website.",
+  })
+);
+```
+
+### Advanced hook example
+
+```html
+<!-- Code block example -->
+<pre>
+  <code class="language-bash" data-replace="{{YOUR_API_KEY}}" data-replaceWith="grtf32a35bbc...">
+    gretel configure --key {{YOUR_API_KEY}}
+  </code>
+</pre>
+
+<script>
+  hljs.addPlugin(
+    new CopyButtonPlugin({
+      hook: (text, el) => {
+        let { replace, replacewith } = el.dataset;
+        if (replace && replacewith) {
+          return text.replace(replace, replacewith);
+        }
+        return text;
+      },
+      callback: (text, el) => {
+        /* logs `gretel configure --key grtf32a35bbc...` */
+        console.log(text);
+      },
+    })
+  );
+  hljs.highlightAll();
+</script>
+```
+
 ## Customization
 
-| CSS selector           | Details                                                                                                                   |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `.hljs-copy-wrapper`   | Applied to the parent `<pre>` element that wraps the .hljs code.                                                          |
-| `.hljs-copy-button`    | The copy button itself.                                                                                                   |
-| `[data-copied='true']` | This data attribute is applied to the copy button and is set to `true` for two seconds when the copy action is performed. |
-| `.hljs-copy-alert`     | A visually hidden status element that announces the copy confirmation to screen readers.                                  |
+| CSS selector           | Details                                                                                                                                                                                        |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.hljs-copy-wrapper`   | Applied to the parent `<pre>` element that wraps the .hljs code.                                                                                                                               |
+| `.hljs-copy-button`    | The copy button itself.<br /><br />The variable `--hljs-theme-background` is automatically applied to the parent element. This allows the button to inherit the code block's background color. |
+| `[data-copied='true']` | This data attribute is applied to the copy button and is set to `true` for two seconds when the copy action is performed.                                                                      |
+| `.hljs-copy-alert`     | A visually hidden status element that announces the copy confirmation to screen readers.                                                                                                       |
