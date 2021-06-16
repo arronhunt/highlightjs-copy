@@ -15,11 +15,7 @@ class CopyButtonPlugin {
    * @param {Hook} [options.hook]
    */
   constructor(options) {
-    self.hook =
-      options.hook ||
-      function (text) {
-        return text;
-      };
+    self.hook = options.hook;
     self.callback = options.callback;
   }
   "after:highlightElement"({ el, text }) {
