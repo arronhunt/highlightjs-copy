@@ -14,7 +14,7 @@ class CopyButtonPlugin {
    * @param {CopyCallback} [options.callback]
    * @param {Hook} [options.hook]
    */
-  constructor(options) {
+  constructor(options = {}) {
     self.hook = options.hook;
     self.callback = options.callback;
   }
