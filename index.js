@@ -11,15 +11,11 @@ class CopyButtonPlugin {
   /**
    * Create a new CopyButtonPlugin class instance
    * @param {Object} [options] - Functions that will be called when a copy event fires
-   * @param {hook} [options.hook]
-   * @param {callback} [options.callback]
+   * @param {CopyCallback} [options.callback]
+   * @param {Hook} [options.hook]
    */
-  constructor(options) {
-    self.hook =
-      options.hook ||
-      function (text) {
-        return text;
-      };
+  constructor(options = {}) {
+    self.hook = options.hook;
     self.callback = options.callback;
   }
   "after:highlightElement"({ el, text }) {
@@ -43,7 +39,7 @@ class CopyButtonPlugin {
 
       let newText = text;
       if (hook && typeof hook === "function") {
-        newText = hook(text, el);
+        newText = hook(text, el) || text;
       }
 
       navigator.clipboard
@@ -74,12 +70,14 @@ class CopyButtonPlugin {
 }
 
 /**
- * @function copyCallback
+ * @typedef {function} CopyCallback
  * @param {string} text - The raw text copied to the clipboard.
- * @param {Object} el - The code block element that was copied from.
+ * @param {HTMLElement} el - The code block element that was copied from.
+ * @returns {undefined}
  */
 /**
- * @function hook
+ * @typedef {function} Hook
  * @param {string} text - The raw text copied to the clipboard.
- * @param {Object} el - The code block element that was copied from.
+ * @param {HTMLElement} el - The code block element that was copied from.
+ * @returns {string|undefined}
  */
