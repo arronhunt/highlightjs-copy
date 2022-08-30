@@ -8,23 +8,30 @@
  * Adds a copy button to highlightjs code blocks
  */
 class CopyButtonPlugin {
+
   /**
    * Create a new CopyButtonPlugin class instance
    * @param {Object} [options] - Functions that will be called when a copy event fires
    * @param {CopyCallback} [options.callback]
    * @param {Hook} [options.hook]
+   * @param {string} [options.copyLabel]
+   * @param {string} [options.copiedLabel]
+   * @param {string} [options.alertLabel]
    */
   constructor(options = {}) {
     self.hook = options.hook;
     self.callback = options.callback;
+    self.copyLabel = options.copyLabel ? options.copyLabel : "Copy";
+    self.copiedLabel = options.copiedLabel ? options.copiedLabel : "Copied!";
+    self.alertLabel = options.alertLabel ? options.alertLabel : "Copied to clipboard";
   }
   "after:highlightElement"({ el, text }) {
     // Create the copy button and append it to the codeblock.
     let button = Object.assign(document.createElement("button"), {
-      innerHTML: "Copy",
+      innerHTML: self.copyLabel,
       className: "hljs-copy-button",
     });
-    button.dataset.copied = false;
+    button.dataset.copied = 'false';
     el.parentElement.classList.add("hljs-copy-wrapper");
     el.parentElement.appendChild(button);
 
@@ -45,19 +52,19 @@ class CopyButtonPlugin {
       navigator.clipboard
         .writeText(newText)
         .then(function () {
-          button.innerHTML = "Copied!";
-          button.dataset.copied = true;
+          button.innerHTML = self.copiedLabel;
+          button.dataset.copied = 'true';
 
           let alert = Object.assign(document.createElement("div"), {
             role: "status",
             className: "hljs-copy-alert",
-            innerHTML: "Copied to clipboard",
+            innerHTML: self.alertLabel,
           });
           el.parentElement.appendChild(alert);
 
           setTimeout(() => {
-            button.innerHTML = "Copy";
-            button.dataset.copied = false;
+            button.innerHTML = self.copyLabel;
+            button.dataset.copied = 'false';
             el.parentElement.removeChild(alert);
             alert = null;
           }, 2000);
