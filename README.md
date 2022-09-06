@@ -89,6 +89,33 @@ hljs.addPlugin(
 </script>
 ```
 
+## Localization
+
+highlightjs-copy supports multiple locales by providing the correct language for accessibility.
+
+```js
+hljs.addPlugin(
+  new CopyButtonPlugin({
+    lang: "es", // The copy button now says "Copiado!" when selected.
+  })
+);
+```
+
+This option is unnecessary if you correctly add the lang attribute to your document. You can override this behavior by providing the `lang` option as described above.
+
+```html
+<html lang="es">
+  <body>
+    <!-- The plugin language defaults to `es` to match the document, so manually setting it is unnecessary. -->
+    <script>
+      hljs.addPlugin(new CopyButtonPlugin());
+    </script>
+  </body>
+</html>
+```
+
+If the document has no `lang` set and the `lang` option is not provided, it will default to `en`.
+
 ## Customization
 
 | CSS selector           | Details                                                                                                                                                                                        |
