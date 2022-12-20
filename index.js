@@ -71,6 +71,8 @@ class CopyButtonPlugin {
   }
 }
 
+module.exports = CopyButtonPlugin;
+
 /**
  * Basic support for localization. Please submit a PR
  * to help add more languages.
