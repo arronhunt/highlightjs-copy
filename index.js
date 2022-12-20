@@ -69,6 +69,8 @@ class CopyButtonPlugin {
   }
 }
 
+module.exports = CopyButtonPlugin;
+
 /**
  * @typedef {function} CopyCallback
  * @param {string} text - The raw text copied to the clipboard.
