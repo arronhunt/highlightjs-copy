@@ -80,8 +80,8 @@ module.exports = CopyButtonPlugin;
  */
 const locales = {
   en: ["Copy", "Copied!", "Copied to clipboard"],
-  es: ["Copiar", "Copiado!", "Copiado al portapapeles"],
-  fr: ["Copier", "Copié!", "Copié dans le presse-papier"],
+  es: ["Copiar", "¡Copiado!", "Copiado al portapapeles"],
+  fr: ["Copier", "Copié !", "Copié dans le presse-papier"],
   de: ["Kopieren", "Kopiert!", "In die Zwischenablage kopiert"],
   ja: ["コピー", "コピーしました！", "クリップボードにコピーしました"],
   ko: ["복사", "복사됨!", "클립보드에 복사됨"],
