@@ -1,12 +1,25 @@
 {
   "name": "highlightjs-copy",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple, accessible highlightjs plugin to add a copy button to your codeblocks.",
-  "main": "dist/highlightjs-copy.min.js",
+  "main": "dist/highlightjs-copy.cjs.js",
+  "module": "dist/highlightjs-copy.esm.js",
+  "browser": "dist/highlightjs-copy.js",
+  "exports": {
+    ".": {
+      "import": "./dist/highlightjs-copy.esm.js",
+      "require": "./dist/highlightjs-copy.cjs.js",
+      "browser": "./dist/highlightjs-copy.js"
+    },
+    "./css": {
+      "import": "./dist/css/highlightjs-copy.css",
+      "require": "./dist/css/highlightjs-copy.css"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "uglifyjs index.js -o ./dist/highlightjs-copy.min.js && uglifycss ./styles/highlightjs-copy.css > ./dist/highlightjs-copy.min.css && exit",
-    "build": "esbuild index.js --outfile=dist/highlightjs-copy.js --bundle --target=chrome58,firefox57,safari11,edge16 --format=iife --global-name=CopyButtonPlugin"
+    "prepare": "npm run build && uglifycss ./styles/highlightjs-copy.css > ./dist/highlightjs-copy.min.css && exit",
+    "build": "node build.js"
   },
   "author": "Arron Hunt <arronjhunt@gmail.com>",
   "homepage": "https://github.com/arronhunt/highlightjs-copy",
