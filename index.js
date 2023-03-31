@@ -20,7 +20,9 @@ class CopyButtonPlugin {
     self.callback = options.callback;
     self.lang = options.lang || document.documentElement.lang || "en";
   }
-  "after:highlightElement"({ el, text }) {
+  "after:highlightElement"($) {
+    const el = $.el;
+    const text = $.text;
     // Create the copy button and append it to the codeblock.
     let button = Object.assign(document.createElement("button"), {
       innerHTML: locales[lang]?.[0] || "Copy",
