@@ -96,22 +96,9 @@ Light mode will apply a dark copy button to a code block with a light background
 Example:
 
 ```html
-<pre><code class="language-html hljs-copy-light">&lt;h1&gt;This  is an h1 tag&lt;/h1&gt;
-&lt;h2&gt;This is an h2 tag&lt;/h2&gt;
-
-&lt;p&gt;Ordered List&lt;/p&gt;
-&lt;ol&gt;
-    &lt;li&gt;List 1&lt;/li&gt;
-    &lt;li&gt;Item 2&lt;/li&gt;
-    &lt;li&gt;Item 3&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Unordered List&lt;/p&gt;
-&lt;ul&gt;
-    &lt;li&gt;Item 1&lt;/li&gt;
-    &lt;li&gt;Item 2&lt;/li&gt;
-    &lt;li&gt;Item 3&lt;/li&gt;
-&lt;/ul&gt;</code></pre>
+<pre><code class="language-html hljs-copy-light">
+  &lt;p&gt;Hello World!&lt;/p&gt;
+</code></pre>
 ```
 
 ## Localization
