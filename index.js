@@ -27,6 +27,9 @@ class CopyButtonPlugin {
       className: "hljs-copy-button",
     });
     button.dataset.copied = false;
+    if (el.classList.contains('hljs-copy-light')) {
+      button.classList.add('hljs-copy-light-mode');
+    }
     el.parentElement.classList.add("hljs-copy-wrapper");
     el.parentElement.appendChild(button);
 
