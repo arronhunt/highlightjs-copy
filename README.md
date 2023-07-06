@@ -89,6 +89,18 @@ hljs.addPlugin(
 </script>
 ```
 
+### Light mode
+
+Light mode will apply a dark copy button to a code block with a light background. To enable light mode, add the CSS class .hljs-copy-light to your code block.
+
+Example:
+
+```html
+<pre><code class="language-html hljs-copy-light">
+  &lt;p&gt;Hello World!&lt;/p&gt;
+</code></pre>
+```
+
 ## Localization
 
 highlightjs-copy supports multiple locales by providing the correct language for accessibility.
@@ -124,3 +136,5 @@ If the document has no `lang` set and the `lang` option is not provided, it will
 | `.hljs-copy-button`    | The copy button itself.<br /><br />The variable `--hljs-theme-background` is automatically applied to the parent element. This allows the button to inherit the code block's background color. |
 | `[data-copied='true']` | This data attribute is applied to the copy button and is set to `true` for two seconds when the copy action is performed.                                                                      |
 | `.hljs-copy-alert`     | A visually hidden status element that announces the copy confirmation to screen readers.                                                                                                       |
+| `.hljs-copy-light`     | Add this to the code block to enable light mode.                                                                                                       |
+| `.hljs-copy-light-mode`     | Applied to the copy button when light mode has been enabled.                                                                                                       |
