@@ -35,6 +35,10 @@ class CopyButtonPlugin {
       "--hljs-theme-background",
       window.getComputedStyle(el).backgroundColor
     );
+    el.parentElement.style.setProperty(
+      "--hljs-theme-color",
+      window.getComputedStyle(el).color
+    );
 
     button.onclick = function () {
       if (!navigator.clipboard) return;
