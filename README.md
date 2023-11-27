@@ -39,6 +39,18 @@ npm install highlightjs-copy
 hljs.addPlugin(new CopyButtonPlugin());
 ```
 
+### Autohide
+
+By default, the copy button is hidden until a user hovers the code block. Set this to `false` to have the copy button always visible.
+
+```javascript
+hljs.addPlugin(
+  new CopyButtonPlugin({
+    autohide: false, // Always show the copy button
+  })
+);
+```
+
 ### With a callback
 
 ```javascript
