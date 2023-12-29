@@ -1,6 +1,6 @@
 {
   "name": "highlightjs-copy-ts",
-  "version": "1.0.5-rev1",
+  "version": "1.0.6",
   "description": "A simple, accessible highlightjs plugin to add a copy button to your codeblocks.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
