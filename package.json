@@ -12,7 +12,7 @@
     "prepare": "uglifyjs src/index.js -o ./dist/highlightjs-copy.min.js && uglifycss ./styles/highlightjs-copy.css > ./dist/highlightjs-copy.min.css && cp src/index.js dist/index.js && tsc && exit"
   },
   "author": "Arron Hunt <arronjhunt@gmail.com>",
-  "homepage": "https://github.com/marucjmar/highlightjs-copy",
+  "homepage": "https://github.com/arronhunt/highlightjs-copy",
   "license": "ISC",
   "devDependencies": {
     "typescript": "^5.3.3",
