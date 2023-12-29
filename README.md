@@ -1,4 +1,4 @@
-# highlightjs-copy-ts
+# highlightjs-copy
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6b2257bf-a914-4f05-8166-a678eaff9fe8/deploy-status)](https://app.netlify.com/sites/highlightjs-copy/deploys)
 
@@ -28,7 +28,7 @@ A simple, accessible [highlightjs](https://github.com/highlightjs/highlight.js) 
 ### NPM
 
 ```bash
-npm install highlightjs-copy-ts
+npm install highlightjs-copy
 ```
 
 ## Usage
