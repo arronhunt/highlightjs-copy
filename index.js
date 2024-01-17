@@ -14,11 +14,16 @@ class CopyButtonPlugin {
    * @param {CopyCallback} [options.callback]
    * @param {Hook} [options.hook]
    * @param {String} [options.lang] Defaults to the document body's lang attribute and falls back to "en"
+   * @param {height: string, top: string} [options.button]
    */
   constructor(options = {}) {
     self.hook = options.hook;
     self.callback = options.callback;
     self.lang = options.lang || document.documentElement.lang || "en";
+    self.buttonStyle = {
+      height : options.button.height,
+        top : options.button.top,
+    }
   }
   "after:highlightElement"({ el, text }) {
     // Create the copy button and append it to the codeblock.
@@ -29,6 +34,10 @@ class CopyButtonPlugin {
     button.dataset.copied = false;
     el.parentElement.classList.add("hljs-copy-wrapper");
     el.parentElement.appendChild(button);
+
+    // custom style button
+    if (buttonStyle.height) button.style.height = buttonStyle.height;
+    if (buttonStyle.top) button.style.top = buttonStyle.top;
 
     // Add a custom proprety to the code block so that the copy button can reference and match its background-color value.
     el.parentElement.style.setProperty(
