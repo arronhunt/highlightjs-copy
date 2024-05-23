@@ -88,6 +88,7 @@ if (typeof module != "undefined") {
 const locales = {
   en: ["Copy", "Copied!", "Copied to clipboard"],
   es: ["Copiar", "¡Copiado!", "Copiado al portapapeles"],
+  "pt-BR": ["Copiar", "Copiado!", "Copiado para a área de transferência"],
   fr: ["Copier", "Copié !", "Copié dans le presse-papier"],
   de: ["Kopieren", "Kopiert!", "In die Zwischenablage kopiert"],
   ja: ["コピー", "コピーしました！", "クリップボードにコピーしました"],
