@@ -2,13 +2,8 @@
   position: relative;
   overflow: hidden;
 }
-.hljs-copy-wrapper:hover .hljs-copy-button,
-.hljs-copy-button:focus {
-  transform: translateX(0);
-}
 .hljs-copy-button {
   position: absolute;
-  transform: translateX(calc(100% + 1.125em));
   top: 0.5em;
   right: 0.5em;
   width: 2rem;
@@ -50,6 +45,14 @@
   text-indent: 0px; /* Shows the inner text */
   width: auto;
 }
+.hljs-copy-button[data-autohide="true"] {
+  transform: translateX(calc(100% + 1.125em));
+}
+.hljs-copy-wrapper:hover .hljs-copy-button,
+.hljs-copy-button:focus {
+  transform: translateX(0);
+}
+
 @media (prefers-reduced-motion) {
   .hljs-copy-button {
     transition: none;

@@ -1,7 +1,7 @@
 /**
  *  @file highlight-copy.js
  *  @author Arron Hunt <arronjhunt@gmail.com>
- *  @copyright Copyright 2021. All rights reserved.
+ *  @copyright Copyright 2021-2023. All rights reserved.
  */
 
 /**
@@ -14,19 +14,26 @@ class CopyButtonPlugin {
    * @param {CopyCallback} [options.callback]
    * @param {Hook} [options.hook]
    * @param {String} [options.lang] Defaults to the document body's lang attribute and falls back to "en"
+   * @param {Boolean} [options.autohide=true] Automatically hides the copy button until a user hovers the code block. Defaults to False
    */
   constructor(options = {}) {
-    self.hook = options.hook;
-    self.callback = options.callback;
-    self.lang = options.lang || document.documentElement.lang || "en";
+    this.hook = options.hook;
+    this.callback = options.callback;
+    this.lang = options.lang || document.documentElement.lang || "en";
+    this.autohide =
+      typeof options.autohide !== "undefined" ? options.autohide : true;
   }
   "after:highlightElement"({ el, text }) {
+    let { hook, callback, lang, autohide } = this;
+
     // Create the copy button and append it to the codeblock.
     let button = Object.assign(document.createElement("button"), {
       innerHTML: locales[lang]?.[0] || "Copy",
       className: "hljs-copy-button",
     });
     button.dataset.copied = false;
+    button.dataset.autohide = autohide;
+
     el.parentElement.classList.add("hljs-copy-wrapper");
     el.parentElement.appendChild(button);
 
