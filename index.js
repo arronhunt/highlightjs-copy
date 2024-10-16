@@ -82,10 +82,7 @@ class CopyButtonPlugin {
   }
 }
 
-// Check if the NodeJS environment is available before exporting the class
-if (typeof module != "undefined") {
-  module.exports = CopyButtonPlugin;
-}
+export default CopyButtonPlugin
 
 /**
  * Basic support for localization. Please submit a PR
