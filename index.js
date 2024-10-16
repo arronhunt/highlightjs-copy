@@ -1,7 +1,7 @@
 /**
  *  @file highlight-copy.js
  *  @author Arron Hunt <arronjhunt@gmail.com>
- *  @copyright Copyright 2021-2023. All rights reserved.
+ *  @copyright Copyright 2021-2024. All rights reserved.
  */
 
 /**
@@ -24,6 +24,9 @@ class CopyButtonPlugin {
       typeof options.autohide !== "undefined" ? options.autohide : true;
   }
   "after:highlightElement"({ el, text }) {
+    // If the code block already has a copy button, return.
+    if (el.parentElement.querySelector(".hljs-copy-button")) return;
+
     let { hook, callback, lang, autohide } = this;
 
     // Create the copy button and append it to the codeblock.
