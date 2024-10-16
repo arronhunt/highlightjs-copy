@@ -27,24 +27,33 @@ class CopyButtonPlugin {
     let { hook, callback, lang, autohide } = this;
 
     // Create the copy button and append it to the codeblock.
+    let container = Object.assign(document.createElement("div"), {
+      className: "hljs-copy-container",
+    });
+    container.dataset.autohide = autohide;
+
     let button = Object.assign(document.createElement("button"), {
       innerHTML: locales[lang]?.[0] || "Copy",
       className: "hljs-copy-button",
     });
     button.dataset.copied = false;
-    button.dataset.autohide = autohide;
 
     el.parentElement.classList.add("hljs-copy-wrapper");
-    el.parentElement.appendChild(button);
+    el.parentElement.appendChild(container);
+    container.appendChild(button);
 
-    // Add a custom proprety to the code block so that the copy button can reference and match its background-color value.
-    el.parentElement.style.setProperty(
+    // Add a custom proprety to the container so that the copy button can reference and match its theme values.
+    container.style.setProperty(
       "--hljs-theme-background",
       window.getComputedStyle(el).backgroundColor
     );
-    el.parentElement.style.setProperty(
+    container.style.setProperty(
       "--hljs-theme-color",
       window.getComputedStyle(el).color
+    );
+    container.style.setProperty(
+      "--hljs-theme-padding",
+      window.getComputedStyle(el).padding
     );
 
     button.onclick = function () {
