@@ -101,6 +101,24 @@ hljs.addPlugin(
 </script>
 ```
 
+## Disable on certain elements
+
+You can disable the copy button on certain elements using a function that returns a boolean value.
+
+```javascript
+hljs.addPlugin(
+  new CopyButtonPlugin({
+    enabled: (el) => {
+      // Disables elements that contain data-disable-copy
+      if (el.dataset.disableCopy) {
+        return false;
+      }
+      return true;
+    },
+  })
+);
+```
+
 ## Localization
 
 highlightjs-copy supports multiple locales by providing the correct language for accessibility.
