@@ -15,6 +15,7 @@ class CopyButtonPlugin {
    * @param {Hook} [options.hook]
    * @param {String} [options.lang] Defaults to the document body's lang attribute and falls back to "en"
    * @param {Boolean} [options.autohide=true] Automatically hides the copy button until a user hovers the code block. Defaults to False
+   * @param {Enabled} [options.enabled] A function that returns a boolean to determine if the copy button should be added to the code block.
    */
   constructor(options = {}) {
     this.hook = options.hook;
@@ -22,12 +23,16 @@ class CopyButtonPlugin {
     this.lang = options.lang || document.documentElement.lang || "en";
     this.autohide =
       typeof options.autohide !== "undefined" ? options.autohide : true;
+    this.enabled = options.enabled;
   }
   "after:highlightElement"({ el, text }) {
     // If the code block already has a copy button, return.
     if (el.parentElement.querySelector(".hljs-copy-button")) return;
 
-    let { hook, callback, lang, autohide } = this;
+    let { hook, callback, lang, autohide, enabled } = this;
+
+    if (typeof enabled === "function" && !enabled(el)) return;
+    if (typeof enabled === "boolean" && !enabled) return;
 
     // Create the copy button and append it to the codeblock.
     let container = Object.assign(document.createElement("div"), {
@@ -128,4 +133,9 @@ const locales = {
  * @param {string} text - The raw text copied to the clipboard.
  * @param {HTMLElement} el - The code block element that was copied from.
  * @returns {string|undefined}
+ */
+/**
+ * @typedef {function|boolean} Enabled
+ * @param {HTMLElement} el - The code block element that was copied from.
+ * @returns {boolean}
  */
