@@ -59,7 +59,7 @@ class CopyButtonPlugin {
       window.getComputedStyle(el).padding
     );
 
-    let fallback_clipboard = ((text)=>{
+    let fallback_clipboard = async function(text) {
         var textBox = document.createElement("textarea");
         textBox.value = text;
         textBox.style.top = "0";
@@ -73,10 +73,10 @@ class CopyButtonPlugin {
             var msg = success ? 'succeeded' : 'failed';
             console.log('Clipboard Fallback: Copying text command ' + msg);
         } catch (e) {
-        console.error('Clipboard Fallback: Unable to copy', e);
+            console.error('Clipboard Fallback: Unable to copy', e);
         }
         document.body.removeChild(textBox);
-    });
+    };
 
     button.onclick = async () => {
       let newText = text;
@@ -92,7 +92,7 @@ class CopyButtonPlugin {
       } catch (e) {
           console.error(e);
           console.error("Clipboard API writeText() failed! Fallback to document.exec(\"copy\")...");
-          fallback_clipboard(newText);
+          await fallback_clipboard(newText);
       }
 
       button.innerHTML = locales[lang]?.[1] || "Copied!";
