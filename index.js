@@ -26,8 +26,9 @@ class CopyButtonPlugin {
     this.enabled = options.enabled;
   }
   "after:highlightElement"({ el, text }) {
-    // If the code block already has a copy button, return.
-    if (el.parentElement.querySelector(".hljs-copy-button")) return;
+    // If the code block already has a copy button, or its marked to ignore, return.
+    if (el.parentElement.querySelector(".hljs-copy-button")
+      || el.parentElement.classList.contains('nohljs-copy')) return;
 
     let { hook, callback, lang, autohide, enabled } = this;
 

@@ -119,6 +119,14 @@ hljs.addPlugin(
 );
 ```
 
+or add a class to your `<pre>` element,  `nohljs-copy`:
+
+```html
+<pre class="nohljs-copy">
+  <code>...</code>
+<pre>
+```
+
 ## Localization
 
 highlightjs-copy supports multiple locales by providing the correct language for accessibility.
