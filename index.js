@@ -7,103 +7,82 @@
 /**
  * Adds a copy button to highlightjs code blocks
  */
-class CopyButtonPlugin {
+class CopyToClipboard {
   /**
-   * Create a new CopyButtonPlugin class instance
+   * Create a new CopyToClipboard class instance
    * @param {Object} [options] - Functions that will be called when a copy event fires
    * @param {CopyCallback} [options.callback]
    * @param {Hook} [options.hook]
    * @param {String} [options.lang] Defaults to the document body's lang attribute and falls back to "en"
-   * @param {Boolean} [options.autohide=true] Automatically hides the copy button until a user hovers the code block. Defaults to False
+   * @param {Boolean} [options.autohide=true] Automatically hides the copy button until a user hovers the code block. Defaults to true
    */
   constructor(options = {}) {
     this.hook = options.hook;
     this.callback = options.callback;
     this.lang = options.lang || document.documentElement.lang || "en";
-    this.autohide =
-      typeof options.autohide !== "undefined" ? options.autohide : true;
+    this.autohide = options.autohide !== undefined ? options.autohide : true;
   }
   "after:highlightElement"({ el, text }) {
     // If the code block already has a copy button, return.
     if (el.parentElement.querySelector(".hljs-copy-button")) return;
 
-    let { hook, callback, lang, autohide } = this;
+    const { hook, callback, lang, autohide } = this;
 
     // Create the copy button and append it to the codeblock.
-    let container = Object.assign(document.createElement("div"), {
-      className: "hljs-copy-container",
-    });
+    const container = document.createElement("div");
+    container.className = "hljs-copy-container";
     container.dataset.autohide = autohide;
 
-    let button = Object.assign(document.createElement("button"), {
-      innerHTML: locales[lang]?.[0] || "Copy",
-      className: "hljs-copy-button",
-    });
+    const button = document.createElement("button");
+    button.innerHTML = locales[lang]?.[0] || "Copy";
+    button.className = "hljs-copy-button";
     button.dataset.copied = false;
 
     el.parentElement.classList.add("hljs-copy-wrapper");
     el.parentElement.appendChild(container);
     container.appendChild(button);
 
-    // Add a custom proprety to the container so that the copy button can reference and match its theme values.
-    container.style.setProperty(
-      "--hljs-theme-background",
-      window.getComputedStyle(el).backgroundColor
-    );
-    container.style.setProperty(
-      "--hljs-theme-color",
-      window.getComputedStyle(el).color
-    );
-    container.style.setProperty(
-      "--hljs-theme-padding",
-      window.getComputedStyle(el).padding
-    );
+    // Add a custom property to the container so that the copy button can reference and match its theme values.
+    const computedStyle = window.getComputedStyle(el);
+    container.style.setProperty("--hljs-theme-background", computedStyle.backgroundColor);
+    container.style.setProperty("--hljs-theme-color", computedStyle.color);
+    container.style.setProperty("--hljs-theme-padding", computedStyle.padding);
 
-    button.onclick = function () {
+    button.addEventListener("click", async () => {
       if (!navigator.clipboard) return;
 
       let newText = text;
-      if (hook && typeof hook === "function") {
-        newText = hook(text, el) || text;
+
+      if (hook && typeof hook === "function") newText = hook(text, el) || text;
+
+      try {
+        await navigator.clipboard.writeText(newText);
+        button.innerHTML = locales[lang]?.[1] || "Copied!";
+        button.dataset.copied = true;
+
+        const alert = document.createElement("div");
+        alert.role = "status";
+        alert.className = "hljs-copy-alert";
+        alert.innerHTML = locales[lang]?.[2] || "Copied to clipboard";
+        el.parentElement.appendChild(alert);
+
+        setTimeout(() => {
+          button.innerHTML = locales[lang]?.[0] || "Copy";
+          button.dataset.copied = false;
+          el.parentElement.removeChild(alert);
+        }, 2000);
+
+        if (typeof callback === "function") {
+          callback(newText, el);
+        }
+      } catch (err) {
+        console.error("Clipboard copy failed", err);
       }
-
-      navigator.clipboard
-        .writeText(newText)
-        .then(function () {
-          button.innerHTML = locales[lang]?.[1] || "Copied!";
-          button.dataset.copied = true;
-
-          let alert = Object.assign(document.createElement("div"), {
-            role: "status",
-            className: "hljs-copy-alert",
-            innerHTML: locales[lang]?.[2] || "Copied to clipboard",
-          });
-          el.parentElement.appendChild(alert);
-
-          setTimeout(() => {
-            button.innerHTML = locales[lang]?.[0] || "Copy";
-            button.dataset.copied = false;
-            el.parentElement.removeChild(alert);
-            alert = null;
-          }, 2000);
-        })
-        .then(function () {
-          if (typeof callback === "function") return callback(newText, el);
-        });
-    };
+    });
   }
 }
 
-// Check if the NodeJS environment is available before exporting the class
-if (typeof module != "undefined") {
-  module.exports = CopyButtonPlugin;
-}
-
-/**
- * Basic support for localization. Please submit a PR
- * to help add more languages.
- * https://github.com/arronhunt/highlightjs-copy/pulls
- */
+// Localization data
 const locales = {
   en: ["Copy", "Copied!", "Copied to clipboard"],
   es: ["Copiar", "¡Copiado!", "Copiado al portapapeles"],
@@ -123,9 +102,17 @@ const locales = {
  * @param {HTMLElement} el - The code block element that was copied from.
  * @returns {undefined}
  */
+
 /**
  * @typedef {function} Hook
  * @param {string} text - The raw text copied to the clipboard.
  * @param {HTMLElement} el - The code block element that was copied from.
  * @returns {string|undefined}
  */
+
+// Export for Node/NPM and CDN compatibility
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = CopyToClipboard;
+} else {
+  window.CopyToClipboard = CopyToClipboard;
+}

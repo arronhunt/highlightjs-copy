@@ -1,2 +1,71 @@
+# Windows specific files
+*.dll
+*.exe
+*.sys
+*.bat
+*.com
+
+# Linux specific files
+*~
+*.swp
+.directory
+
+# macOS Specific
 .DS_Store
+Thumbs.db
+
+# Local Directories
+android/
+ios/
+log/
+logs/
+tmp/
+build/
+downloads/
+var/
+wheels/
+target/
+dev-dist/
+certificate/
+
+# Local env Files
+.env
+.env.*
+
+# Environments
+.env/
+.venv/
+env/
+venv/
+
+# Editor Directories and Files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Python Cache
+__pycache__
+
+# Other
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Node Modules (for JavaScript projects)
 node_modules/
+
+# Python Bytecode
+*.pyc
+*.pyo
+
+# Python Packaging Artifacts
+*.egg-info/
+
+# Coverage Reports
+coverage/
+.coverage
