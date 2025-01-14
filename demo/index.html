@@ -1,138 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Demo | highlight-js</title>
-    <meta
-      name="description"
-      content="A simple, accessible highlightjs plugin to add a copy button to your code blocks."
-    />
-    <meta
-      property="og:image"
-      content="https://repository-images.githubusercontent.com/376601151/45b9bc80-cc37-11eb-936c-c3a55741bf77"
-    />
-    <meta
-      name="twitter:image:src"
-      content="https://repository-images.githubusercontent.com/376601151/45b9bc80-cc37-11eb-936c-c3a55741bf77"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
-    <!-- highlight.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
-    />
-    <!-- highlightjs-copy -->
-    <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"
-    />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <main>
-      <section class="examples p-2">
-        <div class="wrapper">
-          <h1>highlightjs-copy Demo</h1>
-          <a href="https://github.com/arronhunt/highlightjs-copy"
-            >View on GitHub</a
-          >
-          <h2>Basic examples</h2>
-          <h3>Basic copy/paste</h3>
-          <p>Try copying the code below and pasting in the preview.</p>
-          <pre><code class="language-js">function readmeDemo() {
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo | highlight.js Copy Plugin</title>
+  <meta name="description" content="A simple, accessible highlight.js plugin to add a copy button to your code blocks.">
+  <meta property="og:image" content="https://repository-images.githubusercontent.com/376601151/45b9bc80-cc37-11eb-936c-c3a55741bf77">
+  <meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/376601151/45b9bc80-cc37-11eb-936c-c3a55741bf77">
+  <meta name="twitter:card" content="summary_large_image">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css">
+  <script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+</head>
+<body class="bg-white text-zinc-800">
+
+<div class="h-screen">
+  <header class="bg-[#f3f3f3] flex h-24 p-2 md:flex-row md:h-20">
+    <div class="flex flex-col space-y-2">
+      <div><span class="font-semibold text-xl">highlight.js Copy Plugin Demo</span></div>
+      <div><a href="https://github.com/arronhunt/highlightjs-copy" class="text-blue-500 hover:underline">View on GitHub</a></div>
+    </div>
+  </header>
+  <main class="flex-grow grid grid-cols-1 h-[calc(100%-5rem)] md:grid-cols-2">
+    <section class="h-full overflow-y-auto p-4">
+      <h2 class="text-xl font-semibold">Basic Examples</h2>
+      <h3 class="mt-4 font-semibold">Basic Copy/Paste</h3>
+      <p class="mb-4">Try copying the code below and pasting it into the preview.</p>
+      <pre><code class="language-javascript">function readmeDemo() {
   alert("Hello world!");
 }</code></pre>
-          <pre><code class="language-js">let x = 5;
+
+      <br />
+
+      <pre><code class="language-javascript">let x = 5;
 let y = 8;
 return x + y;
 // 13</code></pre>
-          <pre><code class="language-js">console.log('Hello world!');</code></pre>
-          <h2>Advanced hooks</h2>
-          <p>
-            Hooks allow you to listen to copy events and intercept the copy
-            event before it is applied to the clipboard.
-          </p>
-          <h3>Usage</h3>
-          <pre><code class="language-js">hljs.addPlugin(new CopyButtonPluginClass({
+
+      <pre><code class="language-javascript">console.log('Hello world!');</code></pre>
+
+      <h2 class="mt-8 font-semibold">Advanced Hooks</h2>
+      <p class="mb-4">Hooks allow you to listen to copy events and intercept the copy event before it is applied to the clipboard.</p>
+
+      <h3 class="mt-4 font-semibold">Usage</h3>
+      <pre><code class="language-javascript">hljs.addPlugin(new CopyButtonPluginClass({
   hook: (text, el) => text.toUpperCase()
 }));</code></pre>
-          <h3>Append strings</h3>
-          <p>
-            You can append string values to copied code. In this example, a
-            copyright message will automatically be appended.
-          </p>
-          <pre><code class="plaintext" data-copyright="© Copyright 1990. All rights reserved.">Here's an example where you can prepend copy...</code></pre>
-          <h3>Replace strings</h3>
-          <p>
-            In this example, we'll replace the template strings with predefined
-            values when copying.
-          </p>
-          <pre><code class="plaintext" data-replace="true">Replace template strings with other values.
-My name is {{name}}
-my favorite animal is a {{dog}}</code></pre>
-          <h3>Update the code element</h3>
-          <p>Change the color of the codeblock when it is copied.</p>
-          <pre><code class="plaintext" data-highlight="true">Copy me and watch me change!</code></pre>
-        </div>
-      </section>
-      <aside class="preview">
-        <pre
-          class="paste-box"
-          id="pastebox"
-          tabindex="1"
-          contenteditable="true"
-        >
-// paste text here</pre
-        >
-      </aside>
-      <section class="history" id="history"></section>
-    </main>
-    <!-- Content -->
-    <script>
-      hljs.debugMode();
-      hljs.addPlugin(
-        new CopyButtonPlugin({
-          hook: (text, el) => {
-            if (el.dataset.copyright) {
-              return `${text}\n\n${el.dataset.copyright}`;
-            }
-            if (el.dataset.highlight) {
-              el.style.filter = "saturate(5)";
-            }
-            if (el.dataset.replace) {
-              return text
-                .replace("{{name}}", "Alexander Graham Bell")
-                .replace("{{dog}}", "Platypus");
-            }
-            return text;
-          },
-          callback: (text, el) => {
-            updateHistory({ el, text, ts: new Date() });
-          },
-        })
-      );
-      hljs.highlightAll();
-    </script>
-    <script>
-      const pasteBox = document.getElementById("pastebox");
-      const history = document.getElementById("history");
 
-      function updateHistory(data) {
-        let details = document.createElement("details");
-        details.open = true;
-        let summary = document.createElement("summary");
-        summary.innerText = `New copy event`;
-        let text = Object.assign(document.createElement("pre"), {
-          className: "log-item p-1",
-          innerText: `${data.text}`,
-        });
-        details.appendChild(summary);
-        details.appendChild(text);
-        history.prepend(details);
-      }
-    </script>
-  </body>
+      <h3 class="mt-4 font-semibold">Append Strings</h3>
+      <p class="mb-4">You can append string values to copied code. In this example, a copyright message will automatically be appended.</p>
+      <pre><code class="plaintext" data-copyright="&#169; Copyright 2025. All rights reserved.">Here's an example where you can prepend copy...</code></pre>
+
+      <h3 class="mt-4 font-semibold">Replace Strings</h3>
+      <p class="mb-4">In this example, we'll replace the template strings with predefined values when copying.</p>
+      <pre><code class="plaintext" data-replace="true">Replace template strings with other values.
+My name is {{name}} and my favorite animal is a {{animal}}</code></pre>
+
+      <h3 class="mt-4 font-semibold">Update the Code Element</h3>
+      <p class="mb-4">Change the color of the code block when it is copied.</p>
+      <pre><code class="plaintext" data-highlight="true">Copy me and watch me change!</code></pre>
+    </section>
+    <aside class="flex flex-col h-full">
+      <div class="bg-[#f3f3f3] flex flex-col h-3/4 p-4">
+        <h2 class="text-xl font-semibold">Paste Preview</h2>
+        <pre id="pastebox" class="flex-grow bg-white text-zinc-900 p-4 mt-4 rounded border border-zinc-300 overflow-auto" tabindex="1" contenteditable="true">// Paste text here...</pre>
+      </div>
+      <div class="bg-[#f3f3f3] flex flex-col h-1/4 overflow-auto">
+        <h2 class="bg-[#f3f3f3] font-semibold p-4 sticky text-xl top-0 w-full">Copy History</h2>
+        <div class="flex flex-col space-y-2 p-4" id="history"></div>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<script>
+  const init = () => {
+    hljs.addPlugin(new CopyToClipboard({
+      hook: (text, el) => {
+        if (el.dataset.copyright) return `${text}\n\n${el.dataset.copyright}`;
+        if (el.dataset.highlight) el.style.filter = 'saturate(5)';
+        if (el.dataset.replace) return text.replace('{{name}}', 'Alexander Graham Bell').replace('{{animal}}', 'Platypus');
+
+        return text;
+      },
+      callback: (text, el) => {
+        updateHistory({el, text, ts: new Date()});
+      },
+    }));
+
+    hljs.highlightAll();
+  }
+
+  const updateHistory = (data) => {
+    const history = document.getElementById('history');
+
+    let details = document.createElement('details');
+    details.open = true;
+
+    let summary = document.createElement('summary');
+    summary.innerText = `New copy event`;
+
+    let text = Object.assign(document.createElement('pre'), {
+      className: 'log-item p-2',
+      innerText: `${data.text}`,
+    });
+
+    details.appendChild(summary);
+    details.appendChild(text);
+    history.prepend(details);
+  }
+
+  init();
+</script>
+</body>
 </html>

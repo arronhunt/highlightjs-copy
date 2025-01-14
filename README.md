@@ -19,10 +19,7 @@ A simple, accessible [highlightjs](https://github.com/highlightjs/highlight.js) 
 ```
 
 ```html
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"
-/>
+<link rel="stylesheet" href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css" />
 ```
 
 ### NPM
@@ -36,17 +33,17 @@ npm install highlightjs-copy
 ### Basic usage
 
 ```javascript
-hljs.addPlugin(new CopyButtonPlugin());
+hljs.addPlugin(new CopyToClipboard());
 ```
 
 ### Autohide
 
-By default, the copy button is hidden until a user hovers the code block. Set this to `false` to have the copy button always visible.
+By default, the copy button is hidden until a visitor hovers over the code block. Set this to `false` to have the copy button always visible.
 
 ```javascript
 hljs.addPlugin(
   new CopyButtonPlugin({
-    autohide: false, // Always show the copy button
+    autohide: false // Always show the copy button
   })
 );
 ```
@@ -55,8 +52,8 @@ hljs.addPlugin(
 
 ```javascript
 hljs.addPlugin(
-  new CopyButtonPlugin({
-    callback: (text, el) => console.log("Copied to clipboard", text),
+  new CopyToClipboard({
+    callback: (text, el) => console.log("Copied to clipboard", text)
   })
 );
 ```
@@ -65,8 +62,8 @@ hljs.addPlugin(
 
 ```javascript
 hljs.addPlugin(
-  new CopyButtonPlugin({
-    hook: (text, el) => text + "\nCopied from my cool website.",
+  new CopyToClipboard({
+    hook: (text, el) => text + "\nCopied from my cool website."
   })
 );
 ```
@@ -83,20 +80,21 @@ hljs.addPlugin(
 
 <script>
   hljs.addPlugin(
-    new CopyButtonPlugin({
+    new CopyToClipboard({
       hook: (text, el) => {
         let { replace, replacewith } = el.dataset;
-        if (replace && replacewith) {
-          return text.replace(replace, replacewith);
-        }
+
+        if (replace && replacewith) return text.replace(replace, replacewith);
+
         return text;
       },
       callback: (text, el) => {
         /* logs `gretel configure --key grtf32a35bbc...` */
         console.log(text);
-      },
+      }
     })
   );
+
   hljs.highlightAll();
 </script>
 ```
@@ -107,7 +105,7 @@ highlightjs-copy supports multiple locales by providing the correct language for
 
 ```js
 hljs.addPlugin(
-  new CopyButtonPlugin({
+  new CopyToClipboard({
     lang: "es", // The copy button now says "Copiado!" when selected.
   })
 );
@@ -120,7 +118,7 @@ This option is unnecessary if you correctly add the lang attribute to your docum
   <body>
     <!-- The plugin language defaults to `es` to match the document, so manually setting it is unnecessary. -->
     <script>
-      hljs.addPlugin(new CopyButtonPlugin());
+      hljs.addPlugin(new CopyToClipboard());
     </script>
   </body>
 </html>
