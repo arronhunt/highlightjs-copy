@@ -68,7 +68,7 @@ class CopyButtonPlugin {
       }
 
       navigator.clipboard
-        .writeText(newText)
+        .writeText(newText.trim())
         .then(function () {
           button.innerHTML = locales[lang]?.[1] || "Copied!";
           button.dataset.copied = true;
