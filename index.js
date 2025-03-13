@@ -13,13 +13,11 @@ class CopyButtonPlugin {
    * @param {Object} [options] - Functions that will be called when a copy event fires
    * @param {CopyCallback} [options.callback]
    * @param {Hook} [options.hook]
-   * @param {String} [options.lang] Defaults to the document body's lang attribute and falls back to "en"
    * @param {Boolean} [options.autohide=true] Automatically hides the copy button until a user hovers the code block. Defaults to False
    */
   constructor(options = {}) {
     this.hook = options.hook;
     this.callback = options.callback;
-    this.lang = options.lang || document.documentElement.lang || "en";
     this.autohide =
       typeof options.autohide !== "undefined" ? options.autohide : true;
   }
@@ -27,7 +25,7 @@ class CopyButtonPlugin {
     // If the code block already has a copy button, return.
     if (el.parentElement.querySelector(".hljs-copy-button")) return;
 
-    let { hook, callback, lang, autohide } = this;
+    let { hook, callback, autohide } = this;
 
     // Create the copy button and append it to the codeblock.
     let container = Object.assign(document.createElement("div"), {
@@ -36,7 +34,6 @@ class CopyButtonPlugin {
     container.dataset.autohide = autohide;
 
     let button = Object.assign(document.createElement("button"), {
-      innerHTML: locales[lang]?.[0] || "Copy",
       className: "hljs-copy-button",
     });
     button.dataset.copied = false;
@@ -70,18 +67,9 @@ class CopyButtonPlugin {
       navigator.clipboard
         .writeText(newText)
         .then(function () {
-          button.innerHTML = locales[lang]?.[1] || "Copied!";
           button.dataset.copied = true;
 
-          let alert = Object.assign(document.createElement("div"), {
-            role: "status",
-            className: "hljs-copy-alert",
-            innerHTML: locales[lang]?.[2] || "Copied to clipboard",
-          });
-          el.parentElement.appendChild(alert);
-
           setTimeout(() => {
-            button.innerHTML = locales[lang]?.[0] || "Copy";
             button.dataset.copied = false;
             el.parentElement.removeChild(alert);
             alert = null;
@@ -98,24 +86,6 @@ class CopyButtonPlugin {
 if (typeof module != "undefined") {
   module.exports = CopyButtonPlugin;
 }
-
-/**
- * Basic support for localization. Please submit a PR
- * to help add more languages.
- * https://github.com/arronhunt/highlightjs-copy/pulls
- */
-const locales = {
-  en: ["Copy", "Copied!", "Copied to clipboard"],
-  es: ["Copiar", "¡Copiado!", "Copiado al portapapeles"],
-  "pt-BR": ["Copiar", "Copiado!", "Copiado para a área de transferência"],
-  fr: ["Copier", "Copié !", "Copié dans le presse-papier"],
-  de: ["Kopieren", "Kopiert!", "In die Zwischenablage kopiert"],
-  ja: ["コピー", "コピーしました！", "クリップボードにコピーしました"],
-  ko: ["복사", "복사됨!", "클립보드에 복사됨"],
-  ru: ["Копировать", "Скопировано!", "Скопировано в буфер обмена"],
-  zh: ["复制", "已复制!", "已复制到剪贴板"],
-  "zh-tw": ["複製", "已複製!", "已複製到剪貼簿"],
-};
 
 /**
  * @typedef {function} CopyCallback
