@@ -35,6 +35,7 @@ class CopyButtonPlugin {
 
     let button = Object.assign(document.createElement("button"), {
       className: "hljs-copy-button",
+      type: "button",
     });
     button.dataset.copied = false;
 
