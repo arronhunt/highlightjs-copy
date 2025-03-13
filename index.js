@@ -38,6 +38,7 @@ class CopyButtonPlugin {
     let button = Object.assign(document.createElement("button"), {
       innerHTML: locales[lang]?.[0] || "Copy",
       className: "hljs-copy-button",
+      type: "button",
     });
     button.dataset.copied = false;
 
