@@ -60,37 +60,61 @@ class CopyButtonPlugin {
       window.getComputedStyle(el).padding
     );
 
-    button.onclick = function () {
-      if (!navigator.clipboard) return;
+    let fallback_clipboard = async function(text) {
+        var textBox = document.createElement("textarea");
+        textBox.value = text;
+        textBox.style.top = "0";
+        textBox.style.left = "0";
+        textBox.style.position = "fixed";
+        document.body.appendChild(textBox);
+        textBox.focus();
+        textBox.select();
+        try {
+            var success = document.execCommand('copy');
+            var msg = success ? 'succeeded' : 'failed';
+            console.log('Clipboard Fallback: Copying text command ' + msg);
+        } catch (e) {
+            console.error('Clipboard Fallback: Unable to copy', e);
+        }
+        document.body.removeChild(textBox);
+    };
 
+    button.onclick = async () => {
       let newText = text;
       if (hook && typeof hook === "function") {
         newText = hook(text, el) || text;
       }
 
-      navigator.clipboard
-        .writeText(newText)
-        .then(function () {
-          button.innerHTML = locales[lang]?.[1] || "Copied!";
-          button.dataset.copied = true;
+      try {            
+          if (!navigator.clipboard) {
+              throw new Error("navigator.clipboard: Clipboard API unavailable.");
+          }
+          await navigator.clipboard.writeText(newText);
+      } catch (e) {
+          console.error(e);
+          console.error("Clipboard API writeText() failed! Fallback to document.exec(\"copy\")...");
+          await fallback_clipboard(newText);
+      }
 
-          let alert = Object.assign(document.createElement("div"), {
-            role: "status",
-            className: "hljs-copy-alert",
-            innerHTML: locales[lang]?.[2] || "Copied to clipboard",
-          });
-          el.parentElement.appendChild(alert);
+      button.innerHTML = locales[lang]?.[1] || "Copied!";
+      button.dataset.copied = true;
 
-          setTimeout(() => {
-            button.innerHTML = locales[lang]?.[0] || "Copy";
-            button.dataset.copied = false;
-            el.parentElement.removeChild(alert);
-            alert = null;
-          }, 2000);
-        })
-        .then(function () {
-          if (typeof callback === "function") return callback(newText, el);
-        });
+      let alert = Object.assign(document.createElement("div"), {
+          role: "status",
+          className: "hljs-copy-alert",
+          innerHTML: locales[lang]?.[2] || "Copied to clipboard",
+      });
+      el.parentElement.appendChild(alert);
+
+      setTimeout(() => {
+          button.innerHTML = locales[lang]?.[0] || "Copy";
+          button.dataset.copied = false;
+          el.parentElement.removeChild(alert);
+          alert = null;
+      }, 2000);
+        
+      if (typeof callback === "function") return callback(newText, el);
+
     };
   }
 }
