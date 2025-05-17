@@ -71,8 +71,6 @@ class CopyButtonPlugin {
 
           setTimeout(() => {
             button.dataset.copied = false;
-            el.parentElement.removeChild(alert);
-            alert = null;
           }, 2000);
         })
         .then(function () {
