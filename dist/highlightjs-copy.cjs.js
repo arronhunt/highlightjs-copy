@@ -1,3 +1,7 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 /**
  *  @file highlight-copy.js
  *  @author Arron Hunt <arronjhunt@gmail.com>
@@ -7,7 +11,7 @@
 /**
  * Adds a copy button to highlightjs code blocks
  */
-export class CopyButtonPlugin {
+class CopyButtonPlugin {
   /**
    * Create a new CopyButtonPlugin class instance
    * @param {Object} [options] - Functions that will be called when a copy event fires
@@ -100,7 +104,7 @@ export class CopyButtonPlugin {
  * to help add more languages.
  * https://github.com/arronhunt/highlightjs-copy/pulls
  */
-export const locales = {
+const locales = {
   en: ["Copy", "Copied!", "Copied to clipboard"],
   es: ["Copiar", "¡Copiado!", "Copiado al portapapeles"],
   "pt-BR": ["Copiar", "Copiado!", "Copiado para a área de transferência"],
@@ -130,3 +134,7 @@ export const locales = {
 if (typeof window !== "undefined") {
   window.CopyButtonPlugin = CopyButtonPlugin;
 }
+
+exports.CopyButtonPlugin = CopyButtonPlugin;
+exports.locales = locales;
+//# sourceMappingURL=highlightjs-copy.cjs.js.map

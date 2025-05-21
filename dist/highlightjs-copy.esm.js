@@ -7,7 +7,7 @@
 /**
  * Adds a copy button to highlightjs code blocks
  */
-export class CopyButtonPlugin {
+class CopyButtonPlugin {
   /**
    * Create a new CopyButtonPlugin class instance
    * @param {Object} [options] - Functions that will be called when a copy event fires
@@ -100,7 +100,7 @@ export class CopyButtonPlugin {
  * to help add more languages.
  * https://github.com/arronhunt/highlightjs-copy/pulls
  */
-export const locales = {
+const locales = {
   en: ["Copy", "Copied!", "Copied to clipboard"],
   es: ["Copiar", "¡Copiado!", "Copiado al portapapeles"],
   "pt-BR": ["Copiar", "Copiado!", "Copiado para a área de transferência"],
@@ -130,3 +130,6 @@ export const locales = {
 if (typeof window !== "undefined") {
   window.CopyButtonPlugin = CopyButtonPlugin;
 }
+
+export { CopyButtonPlugin, locales };
+//# sourceMappingURL=highlightjs-copy.esm.js.map
