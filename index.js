@@ -1,7 +1,6 @@
 /**
  *  @file highlight-copy.js
  *  @author Arron Hunt <arronjhunt@gmail.com>
- *  @copyright Copyright 2021-2024. All rights reserved.
  */
 
 /**

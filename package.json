@@ -5,7 +5,7 @@
   "main": "dist/highlightjs-copy.cjs.js",
   "module": "dist/highlightjs-copy.esm.js",
   "browser": "dist/highlightjs-copy.min.js",
-  "types": "dist/highlightjs-copy.d.ts",
+  "types": "highlightjs-copy.d.ts",
   "files": [
     "dist",
     "styles"
