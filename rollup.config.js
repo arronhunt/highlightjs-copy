@@ -1,6 +1,6 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import terser from "@rollup/plugin-terser";
+import esbuild from "rollup-plugin-esbuild";
 
 export default {
   input: "index.js",
@@ -9,29 +9,40 @@ export default {
       file: "dist/highlightjs-copy.esm.js",
       format: "esm",
       sourcemap: true,
-      exports: "named",
+      exports: "auto",
     },
     {
       file: "dist/highlightjs-copy.cjs.js",
       format: "cjs",
       sourcemap: true,
-      exports: "named",
+      exports: "auto",
     },
     {
       file: "dist/highlightjs-copy.umd.js",
       format: "umd",
       name: "HighlightJSCopy",
       sourcemap: true,
-      exports: "named",
+      exports: "auto",
     },
     {
       file: "dist/highlightjs-copy.min.js",
       format: "umd",
       name: "HighlightJSCopy",
       sourcemap: true,
-      exports: "named",
-      plugins: [terser()],
+      exports: "auto",
     },
   ],
-  plugins: [resolve(), commonjs()],
+  plugins: [
+    resolve(),
+    commonjs(),
+    esbuild({
+      minify: true,
+      target: ["es2020", "chrome58", "firefox57", "safari11"],
+      legalComments: "none",
+      treeShaking: true,
+      minifyIdentifiers: true,
+      minifySyntax: true,
+      minifyWhitespace: true,
+    }),
+  ],
 };

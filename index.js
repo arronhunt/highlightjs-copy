@@ -129,3 +129,6 @@ export const locales = {
 if (typeof window !== "undefined") {
   window.CopyButtonPlugin = CopyButtonPlugin;
 }
+
+// Add default export
+export default CopyButtonPlugin;

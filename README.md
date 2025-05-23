@@ -39,20 +39,36 @@ npm install highlightjs-copy
 hljs.addPlugin(new CopyButtonPlugin());
 ```
 
-### Node.js Usage
+### React Usage
 
 ```javascript
-// Using CommonJS
-const hljs = require("highlight.js");
-const CopyButtonPlugin = require("highlightjs-copy");
-
-hljs.addPlugin(new CopyButtonPlugin());
-
-// Using ES Modules
+// App.tsx
+import React, { useEffect } from "react";
 import hljs from "highlight.js";
 import CopyButtonPlugin from "highlightjs-copy";
+import "highlightjs-copy/dist/highlightjs-copy.min.css";
 
-hljs.addPlugin(new CopyButtonPlugin());
+const codeExample = `
+function helloWorld() {
+  alert("Hello, world!");
+}
+`;
+
+export default function App() {
+  useEffect(() => {
+    hljs.addPlugin(new CopyButtonPlugin());
+    hljs.highlightAll();
+  }, []);
+
+  return (
+    <div>
+      <h1>highlightjs-copy React Example</h1>
+      <pre>
+        <code className="language-js">{codeExample}</code>
+      </pre>
+    </div>
+  );
+}
 ```
 
 ### Autohide

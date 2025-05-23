@@ -3,6 +3,21 @@
  * @author Arron Hunt <arronjhunt@gmail.com>
  */
 
+declare module "highlightjs-copy" {
+  interface CopyButtonPluginOptions {
+    callback?: CopyCallback;
+    hook?: Hook;
+    lang?: string;
+    autohide?: boolean;
+  }
+
+  class CopyButtonPlugin {
+    constructor(options?: CopyButtonPluginOptions);
+  }
+
+  export default CopyButtonPlugin;
+}
+
 /**
  * Callback function that is called after text is copied to clipboard
  */
@@ -60,3 +75,6 @@ export class CopyButtonPlugin {
 export const locales: {
   [key: string]: [string, string, string]; // [Copy, Copied!, Copied to clipboard]
 };
+
+// Add default export
+export default CopyButtonPlugin;

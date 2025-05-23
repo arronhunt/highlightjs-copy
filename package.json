@@ -21,8 +21,9 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.3",
     "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/plugin-terser": "^0.4.4",
+    "esbuild": "^0.25.4",
     "rollup": "^2.79.2",
+    "rollup-plugin-esbuild": "^6.2.1",
     "uglifycss": "0.0.29"
   }
 }
